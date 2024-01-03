@@ -1,0 +1,40 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="wrapper">
+  <div class="form-wrapper">
+    <h2>Jetzt registrieren</h2>
+    <form action="register-submit" method="post">
+
+      <!-- <label for="fname">Vorname</label>
+      <input type="text" name="firstname" placeholder="Vorname" id="fname">
+
+      <label for="lname">Nachname</label>
+      <input type="text" name="lastname" placeholder="Nachname"="lname"> -->
+
+      <label for="uname">Benutzername</label>
+      <input type="text" name="uname" placeholder="Benutzername" id="uname">
+
+      <label for="pwd">Passwort</label>
+      <input type="password" name="pwd" placeholder="********" id="password">
+
+      <label for="cpwd">Passwort wiederholen</label>
+      <input type="password" name="cpwd" placeholder="********" id="confirm-password">
+
+      <label for="email">E-Mail</label>
+      <input type="email" name="email" placeholder="E-Mail" id="email">
+      <!-- 
+      <label for="pnumber">Telefon</label>
+      <input type="number" name="phonenumber" placeholder="Telefon" id="pnumber"> -->
+
+      <input type="submit" name="register" value="Registrieren">
+
+      <div class="error-message">
+        <% if (typeof errorMessage !== "undefined") { %>
+        <%- errorMessage %>
+        <% } %>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

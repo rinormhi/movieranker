@@ -1,0 +1,85 @@
+<%- include("./partials/header.ejs") %>
+<div class="hero">
+  <div class="container">
+    <h1 class="white-font hero-title">Bewerte Filme, die du gesehen hast und entdecke die, deiner Freunde.</h1>
+    <div class="buttons">
+      <a href="/register" class="button">Jetzt kostenlos starten</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container pb-50">
+  <h2>Die beliebtesten Filme:</h2>
+  <div class="movie-grid movies">
+    <% movies.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= movie.title %>
+        </div>
+        <a href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= movie.poster_path %>" alt="">
+        </a>
+        <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <!-- <div class="movie-title">
+        <%= movie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+</div>
+
+<div class="container pt-50 pb-50">
+  <h2>Derzeit im Kino: </h2>
+  <div class="movie-grid movies">
+    <% nowPlaying.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= movie.title %>
+        </div>
+        <a href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= movie.poster_path %>" alt="">
+        </a>
+        <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <!-- <div class="movie-title">
+        <%= movie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+
+</div>
+
+<div class="container pt-50 pb-50">
+  <h2>Diese Filme erscheinen bald:</h2>
+  <div class="movie-grid movies">
+    <% popularMovies.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= movie.title %>
+        </div>
+        <a href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= movie.poster_path %>" alt="">
+        </a>
+        <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <!-- <div class="movie-title">
+        <%= movie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+
+</div>
+<%- include("./partials/footer.ejs") %>

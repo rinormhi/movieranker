@@ -1,0 +1,17 @@
+.profile-avatar img {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.profile-avatar {
+    display: flex;
+}
+
+
+.profile-top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}

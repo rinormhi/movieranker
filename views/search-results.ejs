@@ -1,0 +1,24 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container pt-50 pb-50">
+  <h2>Deine Suche ergab:</h2>
+  <div class="movie-grid movies">
+    <% movies.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <a href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= movie.poster_path %>" alt="">
+        </a>
+        <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <div class="movie-title">
+        <%= movie.title %>
+      </div>
+    </div>
+    <%})%>
+  </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

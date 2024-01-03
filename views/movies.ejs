@@ -1,0 +1,193 @@
+<%- include("./partials/header.ejs") %>
+
+<script>
+  function handleClick(providerId) {
+    const currentUrl = new URL(window.location.href);
+    const params = new URLSearchParams(currentUrl.search);
+
+    const providerIds = params.get('provider_id');
+
+    if (providerIds) {
+      // Wenn providerId bereits in der Query ist, entferne sie
+      const idsArray = providerIds.split(',');
+      const updatedIds = idsArray.filter(id => id !== providerId);
+
+      if (updatedIds.length > 0) {
+        params.set('provider_id', updatedIds.join(','));
+      } else {
+        params.delete('provider_id');
+      }
+    } else {
+      // Wenn providerId nicht in der Query ist, füge sie hinzu
+      params.set('provider_id', providerId);
+    }
+
+    // Aktualisiere die URL mit den neuen Query-Parametern
+    history.replaceState(null, null, `?${params.toString()}`);
+  }
+</script>
+
+<div class="current-values">
+  dsd
+</div>
+
+<div class="container pb-50">
+  <h2 class="movieTitle">Filme</h2>
+  <div class="options">
+    <div class="providers">
+      <!-- TODO: loop though all providers and set a link to them -->
+      <div class="provider-filter">
+        <% providers.forEach((provider, index) => { %>
+        <img class="providerBtn provider-img active" data-providerid="<%= provider.provider_id %>" data-index="<%= index %>" src="https://image.tmdb.org/t/p/w342<%= provider.logo_path %>">
+        <% }) %>
+      </div>
+      <div class="arrow-left">
+        <svg enable-background="new 0 0 15 26" height="26px" id="Layer_1" version="1.1" viewBox="0 0 15 26" width="15px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon fill="#ffffff" points="12.885,0.58 14.969,2.664 4.133,13.5 14.969,24.336 12.885,26.42 2.049,15.584 -0.035,13.5 " />
+        </svg>
+      </div>
+      <div class="arrow-right">
+        <svg enable-background="new 0 0 15 26" height="26px" id="Layer_1" version="1.1" viewBox="0 0 15 26" width="15px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <polygon fill="#ffffff" points="2.019,0.58 -0.035,2.634 10.646,13.316 -0.035,23.997 2.019,26.052 14.755,13.316 " />
+        </svg>
+      </div>
+    </div>
+    <div class="filterproperties">
+      <div class="dropdown">
+        <div class="dropbtn">Erscheinungsjahr
+          <svg fill="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z"></path>
+            </g>
+          </svg>
+        </div>
+        <div class="dropdown-content">
+          <div class="filter-options">
+            <input type="number" name="min-year" id="min-year" value="1990">
+            <input type="number" name="max-year" id="max-year" value="2023">
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <div class="dropbtn">Genre
+          <svg fill="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z"></path>
+            </g>
+          </svg>
+        </div>
+        <div class="dropdown-content">
+          <div class="genre-options">
+            <div class="genre-column">
+              <div class="genre-option" data-genreid="28" data-genre="action">Action</div>
+              <div class="genre-option" data-genreid="12" data-genre="adventure">Abenteuer</div>
+              <div class="genre-option" data-genreid="16" data-genre="animation">Animation</div>
+              <div class="genre-option" data-genreid="35" data-genre="comedy">Comedy</div>
+              <div class="genre-option" data-genreid="80" data-genre="crime">Krimi</div>
+              <div class="genre-option" data-genreid="99" data-genre="documentation">Dokumentation</div>
+            </div>
+            <div class="genre-column">
+              <div class="genre-option" data-genreid="18" data-genre="drama">Drama</div>
+              <div class="genre-option" data-genreid="10751" data-genre="family">Family</div>
+              <div class="genre-option" data-genreid="14" data-genre="fantasy">Fantasy</div>
+              <div class="genre-option" data-genreid="36" data-genre="history">Geschichte</div>
+              <div class="genre-option" data-genreid="27" data-genre="horror">Horror</div>
+              <div class="genre-option" data-genreid="10402" data-genre="music">Musik</div>
+            </div>
+            <div class="genre-column">
+              <div class="genre-option" data-genreid="9648" data-genre="mystery">Mystery</div>
+              <div class="genre-option" data-genreid="10749" data-genre="romance">Romantik</div>
+              <div class="genre-option" data-genreid="878" data-genre="science fiction">Science-Fiction</div>
+              <div class="genre-option" data-genreid="53" data-genre="thriller">Thriller</div>
+              <div class="genre-option" data-genreid="10752" data-genre="war">Krieg</div>
+              <div class="genre-option" data-genreid="37" data-genre="western">Western</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="genre dropdown-filter">
+        <div class="text">
+
+          <div class="text-title">Genre</div>
+          <div class="reset-title">Reset</div>
+        </div>
+        <div class="genre-options">
+          <div class="genre-column">
+            <div class="genre-option" data-genreid="28" data-genre="action">Action</div>
+            <div class="genre-option" data-genreid="12" data-genre="adventure">Abenteuer</div>
+            <div class="genre-option" data-genreid="16" data-genre="animation">Animation</div>
+            <div class="genre-option" data-genreid="35" data-genre="comedy">Comedy</div>
+            <div class="genre-option" data-genreid="80" data-genre="crime">Krimi</div>
+            <div class="genre-option" data-genreid="99" data-genre="documentation">Dokumentation</div>
+          </div>
+          <div class="genre-column">
+            <div class="genre-option" data-genreid="18" data-genre="drama">Drama</div>
+            <div class="genre-option" data-genreid="10751" data-genre="family">Family</div>
+            <div class="genre-option" data-genreid="14" data-genre="fantasy">Fantasy</div>
+            <div class="genre-option" data-genreid="36" data-genre="history">Geschichte</div>
+            <div class="genre-option" data-genreid="27" data-genre="horror">Horror</div>
+            <div class="genre-option" data-genreid="10402" data-genre="music">Musik</div>
+          </div>
+          <div class="genre-column">
+            <div class="genre-option" data-genreid="9648" data-genre="mystery">Mystery</div>
+            <div class="genre-option" data-genreid="10749" data-genre="romance">Romantik</div>
+            <div class="genre-option" data-genreid="878" data-genre="science fiction">Science-Fiction</div>
+            <div class="genre-option" data-genreid="53" data-genre="thriller">Thriller</div>
+            <div class="genre-option" data-genreid="10752" data-genre="war">Krieg</div>
+            <div class="genre-option" data-genreid="37" data-genre="western">Western</div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">Sortieren nach
+        <div class="dropbtn">Beliebtheit (absteigend)
+          <svg fill="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M16.003 18.626l7.081-7.081L25 13.46l-8.997 8.998-9.003-9 1.917-1.916z"></path>
+            </g>
+          </svg>
+        </div>
+        <div class="dropdown-content">
+          <span class="sortby-options">
+            <div data-sortby="popularity.desc" class="sortby-option">Beliebtheit (absteigend)</div>
+            <div data-sortby="popularity.asc" class="sortby-option">Beliebtheit (aufsteigend)</div>
+            <div data-sortby="vote_average.desc" class="sortby-option">Bewertung (absteigend)</div>
+            <div data-sortby="vote_average.asc" class="sortby-option">Bewertung (aufsteigend)</div>
+            <div data-sortby="primary_release_date.desc" class="sortby-option">Erscheinungszeit (absteigend)</div>
+            <div data-sortby="primary_release_date.asc" class="sortby-option">Erscheinungszeit (aufsteigend)</div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="movie-grid movies">
+    <% movies.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= movie.title %>
+        </div>
+        <a title="<%= movie.title %> - (<%= movie.release_date %>)" href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w342<%= movie.poster_path %>" alt="">
+        </a>
+        <div class="like-btn">+</div>
+        <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <!-- <div class="movie-title">
+        <%= movie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+  <a style="margin-top:20px;" id="load-more" class="button">Mehr laden</a>
+
+</div>
+
+<%- include("./partials/footer.ejs") %>

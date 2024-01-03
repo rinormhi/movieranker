@@ -1,0 +1,26 @@
+footer {
+    background: var(--secondary);
+    margin-top: 100px !important;
+}
+
+.footer {
+    padding-top: 40px;
+    padding-bottom: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.copyright {
+    font-size: 12px;
+}

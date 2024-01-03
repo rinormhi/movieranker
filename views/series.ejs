@@ -1,0 +1,28 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container pb-50">
+  <h2>Serien</h2>
+  <div class="movie-grid movies">
+    <% series.forEach(serie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= serie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= serie.title %>
+        </div>
+        <a href="/movies/<%= serie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= serie.poster_path %>" alt="">
+        </a>
+        <div class="score">
+          <%= Math.floor(serie.vote_average * 10) / 10  %>
+        </div>
+      </div>
+      <!-- <div class="movie-title">
+        <%= serie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+  <div class="next-page"><a href="/series/page/<%= ++pageNumber %>">Nächste Seite</a></div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

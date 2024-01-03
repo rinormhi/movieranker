@@ -1,0 +1,185 @@
+header nav ul li a {
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+
+
+
+.dropdown {
+    display: inline-block;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    text-align: left;
+}
+
+.dropdown-content ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--white);
+    padding: 0;
+    border-radius: 4px;
+}
+
+.dropdown-content ul li {
+    margin: 0;
+    width: 100%;
+}
+
+.dropdown-content ul li a {
+    color: var(--primary);
+    padding: 10px 20px;
+    display: block;
+}
+
+.dropdown-content ul li a:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+nav ul li {
+    display: inline;
+    margin-left: 20px;
+}
+
+
+nav ul li:first-of-type {
+    margin-left: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    z-index: 999;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    transition: all .2s ease-in-out;
+}
+
+
+input[type=text] {
+    color: var(--primary);
+}
+
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    height: 100%;
+    transition: all .2s ease-in-out;
+}
+
+.avatar {
+    height: 24px;
+    width: 24px;
+    border-radius: 100px;
+    position: absolute;
+    left: -35px;
+
+}
+
+.arrow-icon {
+    height: 6px;
+    width: auto;
+    align-self: center;
+    margin-left: 5px;
+}
+
+.userMenu {
+    position: relative;
+    display: flex;
+}
+
+
+/* On Scroll */
+
+.shrink .logo {}
+
+header.shrink {
+    background: var(--primary);
+    padding: 0;
+    opacity: 0.9;
+}
+
+.shrink .logo {
+    font-size: 24px;
+}
+
+.shrink nav ul li a {}
+
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.nav .dropdown ul a {
+    color: var(--primary)
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown.mega {
+    position: static;
+}
+
+.dropdown.mega .hidden {
+    width: 100%;
+}
+
+.menu-column {
+    width: calc(33% - 20px)
+}
+
+.dropdown:hover .hidden,
+.hidden:hover {
+    display: flex;
+}
+
+.hidden {
+    position: absolute;
+    display: none;
+    background: white;
+    padding: 20px;
+    flex-direction: column;
+    gap: 10px;
+    left: 0;
+    width: 150px;
+    text-align: left;
+    border-radius: 8px;
+}
+.hidden.mega {
+    flex-direction: row;
+}
+
+.hidden li {
+    display: block;
+    color: black;
+    margin-left: 0;
+}

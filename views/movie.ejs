@@ -1,0 +1,358 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="container movie-container">
+  <div class="backdrop" style="background-size:cover;background-image: url('https://image.tmdb.org/t/p/original<%= movieRes.backdrop_path %>');">
+
+  </div>
+  <div class="movie-site">
+    <div class="sidebar">
+      <div class="movie-poster">
+        <img src="https://image.tmdb.org/t/p/w342<%= movieRes.poster_path %>" alt="">
+      </div>
+      <!-- <div class="movie-numbers">
+        <span class="views">
+          <%= movieRes.vote_count %>
+        </span>
+        <span class="likes">
+          55K
+        </span>
+        <span class="rank">
+          129
+        </span>
+      </div> -->
+
+      <div class="provider-box">
+        <h5>Hier verfügbar:</h5>
+        <div class="provider-title">Kaufen:</div>
+        <% if (purchaseProviders && purchaseProviders.length > 0) { %>
+        <div class="provider-logos">
+          <% purchaseProviders.forEach(provider => { %>
+          <img class="provider-img" src="https://image.tmdb.org/t/p/w342<%= provider.logo_path %>">
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="not-available">Keine Anbieter verfügbar.</div>
+        <% } %>
+
+        <div class="provider-title">Leihen:</div>
+
+        <% if (rentalProviders && rentalProviders.length > 0) { %>
+        <div class="provider-logos">
+          <% rentalProviders.forEach(provider => { %>
+          <img class="provider-img" src="https://image.tmdb.org/t/p/w342<%= provider.logo_path %>">
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="not-available">Keine Anbieter verfügbar.</div>
+        <% } %>
+
+        <div class="provider-title">Streamen:</div>
+
+        <% if (streamingProviders && streamingProviders.length > 0) { %>
+        <div class="provider-logos">
+          <% streamingProviders.forEach(provider => { %>
+          <img class="provider-img" src="https://image.tmdb.org/t/p/w342<%= provider.logo_path %>">
+          <% }) %>
+        </div>
+        <% } else { %>
+        <div class="not-available">Keine Anbieter verfügbar.</div>
+        <% } %>
+
+
+      </div>
+    </div>
+    <div class="movie-content">
+      <div class="movie-heading">
+        <h1><%= movieRes.title %></h1>
+        <span class="movie-year">
+          <%= movieRes.release_date %>
+        </span>
+        <span class="director">
+          <%= dir.name %>
+        </span>
+      </div>
+      <div>Bewertung: <%= movieRes.vote_average %></div>
+      <div class="tagline">
+        <%= movieRes.tagline %>
+      </div>
+      <div class="introduction">
+        <%= movieRes.overview %>
+      </div>
+
+      <script>
+        $(function() {
+          $("#tabs").tabs();
+        });
+      </script>
+
+
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">Besetzung</a></li>
+          <li><a href="#tabs-2">Crew</a></li>
+          <li><a href="#tabs-3">Details</a></li>
+          <li><a href="#tabs-4">Genres</a></li>
+          <li><a href="#tabs-5">Bewertungen</a></li>
+        </ul>
+        <div id="tabs-1">
+          <div class="actors">
+            <% actors.forEach(actor => { %>
+            <a href="/person/<%= actor.id %>" class="artist text-slug">
+              <%= actor.original_name %>
+            </a>
+            <% })%>
+          </div>
+        </div>
+        <div id="tabs-2">
+          <div class="table">
+            <!-- Directors -->
+            <% if (crew.some(person => person.department === "Directing")) { %>
+            <div class="table-left">
+              <span>Directors</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Directing") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Producers -->
+            <% if (crew.some(person => person.department === "Production")) { %>
+            <div class="table-left">
+              <span>Producers</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Production") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Writers -->
+            <% if (crew.some(person => person.department === "Writing")) { %>
+            <div class="table-left">
+              <span>Writers</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Writing") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Camera -->
+            <% if (crew.some(person => person.department === "Camera")) { %>
+            <div class="table-left">
+              <span>Camera</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Camera") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Editors -->
+            <% if (crew.some(person => person.department === "Editing")) { %>
+            <div class="table-left">
+              <span>Editors</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Editing") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Sound -->
+            <% if (crew.some(person => person.department === "Sound")) { %>
+            <div class="table-left">
+              <span>Sound</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Sound") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Costume & Make-Up -->
+            <% if (crew.some(person => person.department === "Costume & Make-Up")) { %>
+            <div class="table-left">
+              <span>Costume & Make-Up</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Costume & Make-Up") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Visual Effects -->
+            <% if (crew.some(person => person.department === "Visual Effects")) { %>
+            <div class="table-left">
+              <span>Visual Effects</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Visual Effects") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Art -->
+            <% if (crew.some(person => person.department === "Art")) { %>
+            <div class="table-left">
+              <span>Art</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Art") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Lighting -->
+            <% if (crew.some(person => person.department === "Lighting")) { %>
+            <div class="table-left">
+              <span>Lighting</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.department === "Lighting") { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Stunts -->
+            <% if (crew.some(person => person.job.includes("Stunts"))) { %>
+            <div class="table-left">
+              <span>Stunts</span>
+            </div>
+            <div class="table-right">
+              <% crew.forEach(crewMember => { %>
+              <% if(crewMember.department && crewMember.job.includes("Stunts")) { %>
+              <a href="#" class="text-slug"><%= crewMember.name %></a>
+              <% } %>
+              <% }) %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <div id="tabs-3">
+          <div class="table">
+
+            <!-- Production Companies -->
+            <% if (movieRes.production_companies) { %>
+            <div class="table-left">
+              <span>Production </span>
+            </div>
+            <div class="table-right">
+              <% movieRes.production_companies.forEach(pc => { %>
+              <a href="#" class="text-slug"><%= pc.name %></a>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Production Companies -->
+            <% if (movieRes.production_countries) { %>
+            <div class="table-left">
+              <span>Production </span>
+            </div>
+
+            <!-- Production Countries -->
+            <div class="table-right">
+              <% movieRes.production_countries.forEach(pc => { %>
+              <a href="#" class="text-slug"><%= pc.name %></a>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <!-- Revenue -->
+            <div class="table-left">
+              <span>Revenue</span>
+            </div>
+            <div class="table-right">
+              <span class="text-slug"><%= "$" + Math.floor(movieRes.revenue / 1000000) + "m"  %></span>
+            </div>
+
+            <!-- Runtime -->
+            <div class="table-left">
+              <span>Runtime</span>
+            </div>
+            <div class="table-right">
+              <span class="text-slug"><%= movieRes.runtime + " min." %></span>
+            </div>
+
+            <!-- Release Date -->
+            <div class="table-left">
+              <span>Release Date</span>
+            </div>
+            <div class="table-right">
+              <span class="text-slug"><%= movieRes.release_date %></span>
+            </div>
+
+            <!-- Original Language -->
+            <div class="table-left">
+              <span>Original Language</span>
+            </div>
+            <div class="table-right">
+              <span class="text-slug"><%= movieRes.original_language %></span>
+            </div>
+
+
+          </div>
+        </div>
+        <div id="tabs-4">
+          Genres
+
+        </div>
+        <div id="tabs-5">
+          <% if (reviews) { %>
+          <div>
+            <% reviews.forEach(review => { %>
+            <div class="author">
+              <img class="author-avatar" src="https://image.tmdb.org/t/p/original<%- review.author_details.avatar_path %>">
+              <div class="text-small author-name"><%= review.author %></div>
+            </div>
+            <p class="text-small"><%- review.content %></p>
+            <% }) %>
+          </div>
+          <% } %>
+        </div>
+
+      </div>
+      <% if (trailer) { %>
+      <iframe class="trailer" width="560" height="315" src="<%= trailer %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<script src="../js/tab-widget.js"></script>
+
+<%- include("./partials/footer.ejs") %>
+
+<!-- backdrop_path -->

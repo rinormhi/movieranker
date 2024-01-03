@@ -1,0 +1,21 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="wrapper">
+  <div class="form-wrapper">
+    <h2>Login</h2>
+    <form action="login-submit" method="post">
+      <label for="fname">Benutzername</label>
+      <input type="text" name="uname" placeholder="Vorname" id="fname">
+      <label for="lname">Passwort</label>
+      <input type="password" name="pwd" placeholder="Nachname"="lname">
+      <input type="submit" name="login" value="Einloggen">
+      <div class="error-message">
+        <% if (typeof errorMessage !== "undefined") { %>
+        <%- errorMessage %>
+        <% } %>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

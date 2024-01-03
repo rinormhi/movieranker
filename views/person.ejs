@@ -1,0 +1,79 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container person-container">
+  <div class="person-site">
+    <div class="person-content">
+
+      <div class="person-name">
+        <h2> <%= personInfo.name %></h2>
+      </div>
+      <div class="movies">
+        <% personMovies.forEach(movie => { %>
+        <div class="movie">
+          <a href="/movies/<%= movie.id %>"><img src="
+            <% if (movie.poster_path) { %>
+            https://image.tmdb.org/t/p/w342<%= movie.poster_path %>
+            <% } else { %>
+            https://placehold.co/149x223/000000/000000
+            <% } %>
+            " alt="<%= movie.title %>"></a>
+        </div>
+        <% }) %>
+      </div>
+
+
+    </div>
+
+    <div class="sidebar">
+      <img class="person-image" src="https://image.tmdb.org/t/p/w342<%= personInfo.profile_path %>">
+      <div class="socials">
+        <% if (personSocials.instagram_id) { %>
+        <div class="instagram">
+          <a href="https://instagram.com/<%= personSocials.instagram_id %>"><img class="social" src="/img/insta.svg"></a>
+        </div>
+        <% } %>
+
+
+        <% if (personSocials.twitter_id) { %>
+        <div class="twitter">
+          <a href="https://twitter.com/<%= personSocials.twitter_id %>"><img class="social" src="/img/x.svg"></a>
+        </div>
+        <% } %>
+        <% if (personSocials.youtube_id) { %>
+        <div class="youtube">
+          <a href="https://youtube.com/<%= personSocials.youtube_id %>"><img class="social" src="/img/youtube.svg"></a>
+        </div>
+        <% } %>
+      </div>
+      <h4>Biografie</h4>
+      <div class="bio text-small">
+        <%= personInfo.biography %>
+      </div>
+      <div class="read-more text-small">
+        read more...
+      </div>
+      <script src="/js/read-more.js"></script>
+
+      <div class="bday">
+        <h5>Geburtstag</h5>
+        <%= personInfo.birthday %>
+      </div>
+
+      <div class="place-of-birth">
+        <h5>Geburtsort</h5>
+        <%= personInfo.place_of_birth %>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+
+<%- include("./partials/footer.ejs") %>
+
+<!-- backdrop_path -->

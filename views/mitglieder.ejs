@@ -1,0 +1,33 @@
+<%- include("./partials/header.ejs") %>
+
+
+<div class="container">
+  <h2>Mitglieder</h2>
+
+
+
+  <style>
+    .left-aligned {
+      text-align: left;
+      ;
+    }
+  </style>
+  <table class="left-aligned">
+    <th>
+    <td>Benutzername</td>
+    <td>Aktiv seid: </td>
+    </th>
+    <% members.forEach(member => { %>
+    <tr>
+      <td><%= member.username %></td>
+      <td><%= member.createdAt %></td>
+    </tr>
+    <% }) %>
+
+  </table>
+</div>
+
+
+<%- include("./partials/footer.ejs") %>
+
+<!-- backdrop_path -->

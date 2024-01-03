@@ -1,0 +1,95 @@
+<%- include("./partials/header.ejs") %>
+
+
+<script>
+  $(document).ready(() => {
+
+    $(function() {
+      $(document).tooltip();
+    });
+
+    $.notify.addStyle('foo', {
+      html: "<div>" +
+        "<div class='clearfix'>" +
+        "<div class='title' data-notify-html='title'/>" +
+        "<div class='buttons'>" +
+        "<button class='no'>Cancel</button>" +
+        "<button class='yes' data-notify-text='button'></button>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
+    });
+    $(".like-btn").on("click", () => {
+      $.notify('Added to likes', {
+        showDuration: 400,
+        position: "bottom center",
+        className: "foo"
+      });
+    })
+  })
+</script>
+
+<style>
+  .custom-notification {
+    background: #000;
+  }
+</style>
+<div class="container pb-50">
+  <h2 class="movieTitle">Filme</h2>
+
+  <div class="options">
+    <div class="providers">
+      <div class="prime">
+        
+      </div>
+      <div class="netflix">
+
+      </div>
+      <div class="apple-tv">
+
+      </div>
+      <div class="disney">
+
+      </div>
+    </div>
+  </div>
+  <div class="movie-grid movies">
+    <% movies.forEach(movie => { %>
+    <div class="movie-wrapper">
+      <div id="<%= movie.id %>" class="movie">
+        <div class="tooltip movie-title">
+          <%= movie.title %>
+        </div>
+        <a title="<%= movie.title %>" href="/movies/<%= movie.id %>">
+          <img src="https://image.tmdb.org/t/p/w154<%= movie.poster_path %>" alt="">
+        </a>
+
+        <div class="like-btn">+</div>
+        <!-- <div class="score">
+          <%= Math.floor(movie.vote_average * 10) / 10  %>
+        </div> -->
+      </div>
+      <!-- <div class="movie-title">
+        <%= movie.title %>
+      </div> -->
+    </div>
+    <%})%>
+  </div>
+  <div class="next-prev">
+    <% if (pageNumber != 1) { %>
+    <div class="prev-page"><a href="/movies/page/<%= --pageNumber %>">« zurück</a></div>
+    <% } %>
+    <div class="next-page"><a href="/movies/page/<%= ++pageNumber %>">weiter »</a></div>
+  </div>
+
+  <style>
+    .next-prev {
+      display: flex;
+      gap: 20px;
+      padding-top: 40px;
+      justify-content: center;
+    }
+  </style>
+</div>
+
+<%- include("./partials/footer.ejs") %>

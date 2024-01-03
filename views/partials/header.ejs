@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/login-form.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/movies.css">
+  <link rel="stylesheet" href="/css/movie-site.css">
+  <link rel="stylesheet" href="/css/person.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <link rel="stylesheet" href="/css/3rd-party/jquery-ui.css">
+
+  <title>Website</title>
+</head>
+
+<body>
+
+  <script src="/js/3rd-party/notify.js"></script>
+
+
+  <header>
+    <div class="header-wrapper container">
+      <div class="logo">
+        <a class="logo" href="/">MovieRanker</a>
+      </div>
+      <div class="nav">
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li class="dropdown mega">
+              <a href="/movies">Filme</a>
+              <!-- <ul class="hidden mega">
+                <div class="menu-column">
+                  <li><a href="/movies/genre/action">Action</a></li>
+                  <li><a href="/movies/genre/adventure">Abenteuer</a></li>
+                  <li><a href="/movies/genre/animation">Animation</a></li>
+                  <li><a href="/movies/genre/comedy">Comedy</a></li>
+                  <li><a href="/movies/genre/crime">Krimi</a></li>
+                  <li><a href="/movies/genre/documentation">Dokumentation</a></li>
+                </div>
+                <div class="menu-column">
+                  <li><a href="/movies/genre/drama">Drama</a></li>
+                  <li><a href="/movies/genre/family">Family</a></li>
+                  <li><a href="/movies/genre/fantasy">Fantasy</a></li>
+                  <li><a href="/movies/genre/history">Geschichte</a></li>
+                  <li><a href="/movies/genre/horror">Horror</a></li>
+                  <li><a href="/movies/genre/music">Musik</a></li>
+                </div>
+                <div class="menu-column">
+                  <li><a href="/movies/genre/mystery">Mystery</a></li>
+                  <li><a href="/movies/genre/romantic">Romantik</ça></li>
+                  <li><a href="/movies/genre/science-fiction">Science-Fiction</a></li>
+                  <li><a href="/movies/genre/thriller">Thriller</a></li>
+                  <li><a href="/movies/genre/war">Krieg</a></li>
+                  <li><a href="/movies/genre/western">Western</a></li>
+                </div>
+              </ul> -->
+            </li>
+
+            <li><a href="/mitglieder">Mitglieder</a></li>
+            <% if (!loggedIn) { %>
+            <li><a href="/register">Registrieren</a></li>
+            <% } %>
+            <li class="dropdown">
+              <% if (username) { %>
+              <a href="#"><%= username %></a>
+              <ul class="hidden">
+                <li><a href="/profil">Profil</a></li>
+                <li>Freunde</li>
+                <li><a href="/abmelden">Abmelden</a></li>
+              </ul>
+              <% } else { %>
+              <a href="/login">Login</a>
+              <% } %>
+            </li>
+          </ul>
+        </nav>
+        <form method="post" action="/search-results">
+          <input type="text" name="query" id="" placeholder="Film suchen...">
+        </form>
+      </div>
+    </div>
+  </header>
+  <script src="/js/header.js"></script>

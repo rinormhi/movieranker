@@ -1,0 +1,10 @@
+.hero {
+    height: calc(500px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(0deg, var(--primary) 10% ,rgba(0, 0, 0, 0.1), var(--primary)), url("../img/hero-bg.jpeg");
+    background-position: center center;
+    background-size: cover;
+}
