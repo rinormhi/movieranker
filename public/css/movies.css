@@ -345,7 +345,7 @@
 
 @media (max-width: 600px) {
     .movie-grid {
-        grid-template-columns: repeat(4, calc(50% - 12px));
+        grid-template-columns: repeat(4, calc(25% - 12px));
     }
 }
 
