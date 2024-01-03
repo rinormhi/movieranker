@@ -192,8 +192,9 @@
 
 
 .options {
-    text-align:left;
+    text-align: left;
 }
+
 .text,
 .filter-options {
     display: flex;
@@ -223,7 +224,7 @@
 }
 
 .sortby-option {
-    cursor:pointer;
+    cursor: pointer;
     font-size: 15px;
 }
 
@@ -337,6 +338,10 @@
     }
 }
 
+@media(max-width:930px) {
+    
+}
+
 @media (max-width: 800px) {
     .movie-grid {
         grid-template-columns: repeat(4, calc(25% - 12px));
@@ -350,5 +355,5 @@
 }
 
 input {
-    color:var(--primary)
+    color: var(--primary)
 }
