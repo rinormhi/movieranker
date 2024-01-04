@@ -119,7 +119,8 @@ header .container {
 
 header.shrink {
     background: var(--primary);
-    padding: 0;
+    padding-top:10px;
+    padding-bottom:10px;
     opacity: 0.9;
 }
 
@@ -174,6 +175,7 @@ header.shrink {
     text-align: left;
     border-radius: 8px;
 }
+
 .hidden.mega {
     flex-direction: row;
 }
@@ -182,4 +184,76 @@ header.shrink {
     display: block;
     color: black;
     margin-left: 0;
+}
+
+
+@media (max-width: 800px) {
+    .movie-grid {
+        grid-template-columns: repeat(4, calc(25% - 12px));
+    }
+
+    .nav input {
+        width: 130px;
+    }
+}
+
+
+@media (max-width:930px) {
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 71px;
+        transform: translateY(calc(-100% - 71px));
+        transition: all .4s ease-in-out;
+        z-index: -1;
+    }
+
+    .shrink .mobile-nav {
+        top: 41px;
+    }
+
+    .mobile-nav.visible {
+        display: block;
+        transition: all .4s ease-in-out;
+
+        transform: translateY(0);
+    }
+
+    .mobile-nav ul {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-nav ul li {
+        margin: 0;
+        text-align: left;
+        padding: 10px 20px;
+        background: var(--primary);
+        border-bottom: 1px solid var(--secondary);
+        cursor: pointer
+    }
+
+    .mobile-nav ul li a {
+        color: var(--white);
+
+    }
+
+    .hamburger-icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        cursor: pointer;
+    }
+
+    .hamburger-icon span {
+        border-bottom: 2px solid white;
+        width: 30px;
+        display: block;
+    }
 }
