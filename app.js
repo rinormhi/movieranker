@@ -21,7 +21,9 @@ app.use(prepareHeader); // Registriere die Middleware
 
 app.set("view engine", "ejs");
 app.use(cors());
-app.use(express.static("/Users/rinor/Programmierung/node-js/projekt1/public"));
+// app.use(express.static("/Users/rinor/Programmierung/node-js/projekt1/public"));
+app.use(express.static(__dirname + '/public'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
