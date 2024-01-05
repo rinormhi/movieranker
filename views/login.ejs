@@ -10,8 +10,8 @@
       <input type="password" name="pwd" placeholder="Nachname"="lname">
       <input type="submit" name="login" value="Einloggen">
       <div class="error-message">
-        <% if (typeof errorMessage !== "undefined") { %>
-        <%- errorMessage %>
+        <% if (typeof error !== "undefined") { %>
+        <%- error %>
         <% } %>
       </div>
     </form>

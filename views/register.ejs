@@ -29,8 +29,8 @@
       <input type="submit" name="register" value="Registrieren">
 
       <div class="error-message">
-        <% if (typeof errorMessage !== "undefined") { %>
-        <%- errorMessage %>
+        <% if (typeof error !== "undefined") { %>
+        <%= error.replace(/</g, "&lt;").replace(/>/g, "&gt;") %>
         <% } %>
       </div>
     </form>

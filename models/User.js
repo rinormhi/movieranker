@@ -1,5 +1,7 @@
+const { valid } = require("node-html-parser");
 const con = require("../db");
 const bcrypt = require("bcrypt")
+
 
 
 class User {
@@ -10,14 +12,14 @@ class User {
             con.query(query, [uname], (error, elements) => {
                 if (error) {
                     console.log("Query Error: " + error);
-                    reject(false);
+                    reject(error);
                 } else {
                     let hashed = elements[0].password;
                     bcrypt.compare(pwd, hashed, (err, result) => {
                         if (result == true) {
                             resolve(true);
                         } else {
-                            resolve(false)
+                            reject("Falsches Password")
                         }
                     })
                 }
@@ -47,7 +49,7 @@ class User {
                     return reject(error);
                 } else {
                     if (elements.length === 0) {
-                        resolve(false)
+                        reject("Benutzer existiert nicht")
                     } else {
                         resolve(true);
                     }
@@ -61,24 +63,28 @@ class User {
         let errorMessage = "";
         return new Promise((resolve, reject) => {
 
-            // PW Validaton
+            // Username Validation
 
+            if (uname.length > 10) {
+                errorMessage += "Benutzername darf max. 10 Zeichen beinhalten. ";
+            } else {
+                validationlevel++;
+            }
+
+            // PW Validation
             if (pwd != cpwd) {
-                errorMessage += "<p class='error'>Passwörter stimmen nicht überein.</p>";
-                // resolve("Passwörter stimmen nicht überein.")
+                errorMessage += "Passwörter stimmen nicht überein. ";
             } else {
                 validationlevel++;
             }
 
             if (pwd.length < 6) {
-                errorMessage += "<p class='error'>Passwort muss mind. 6 Zeichen beinhalten.</p>";
-                // resolve("Passwort muss mind. 6 Zeichen beinhalten")
+                errorMessage += "Passwort muss mind. 6 Zeichen beinhalten. ";
             } else {
                 validationlevel++;
             }
 
             // Email Validaton
-
             let emailValid = (email => {
                 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 return emailRegex.test(email);
@@ -87,23 +93,18 @@ class User {
             if (emailValid) {
                 validationlevel++;
             } else {
-                errorMessage += "<p class='error'>Die E-Mail ist nicht korrekt.</p>";
-
-                // resolve("Email nicht korrekt");
+                errorMessage += "Die E-Mail ist nicht korrekt. ";
             }
 
             // Username Validation
-
             if (uname.length < 5) {
-                errorMessage += "<p class='error'>Dein Passwort muss mindestens 5 Zeichen beinhalten.</p>";
-
-                // resolve("PW muss mindestens 5 Zeichen beinhalten");
+                errorMessage += "Dein Passwort muss mindestens 5 Zeichen beinhalten. ";
             } else {
                 validationlevel++;
             }
 
-            if (validationlevel == 4) {
-                resolve("valid");
+            if (validationlevel == 5) {
+                resolve(true);
             } else {
                 reject(errorMessage);
             }
